@@ -11,9 +11,8 @@ public class Game extends JFrame {
 
         board = new Board();
         add(board);
-        board.setup();
         pack();
-
+        board.setup();
         setLocationRelativeTo(null);
 
     }

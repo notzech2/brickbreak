@@ -11,10 +11,10 @@ public class Board extends JPanel implements ActionListener {
     Timer timer;
     ArrayList<Sprite> actors;
     int paddingNum = 25;
+    Game game;
+    Board(Game game){
 
-    Board(){
-
-
+        this.game = game;
         setPreferredSize(new Dimension(600,800));
         setBackground(Color.black);
 
@@ -22,7 +22,7 @@ public class Board extends JPanel implements ActionListener {
 
     public void setup(){
        actors = new ArrayList<>();
-       actors.add(new Player(Color.green,getWidth()/2,getHeight()/2,100,100,this));
+       actors.add(new Player(Color.green,getWidth()/2,getHeight()/2,70,70,this,game));
        for (int i = 0; i < STATS.numFood; i++){
            actors.add(new Food(Color.orange,(int)(Math.random()*(getWidth()-paddingNum)+paddingNum),(int)(Math.random()*(getHeight()-paddingNum)+paddingNum),20,20,this));
        }
@@ -49,6 +49,15 @@ public class Board extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         for(Sprite thisGuy: actors){
             thisGuy.move();
+        }
+        for(int i = 1; i < actors.size(); i++){
+            if(actors.get(0).collidesWith(actors.get(i))){
+               if (actors.get(i) instanceof Enemy){
+                   System.out.println("Killed it");
+               }
+               else
+                   System.out.println("Ate it");
+            }
         }
         repaint();
     }

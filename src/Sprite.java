@@ -9,6 +9,7 @@ public abstract class Sprite {
         Board board;
 
 
+
         public Sprite(Color color, int x, int y, int width, int height, Board board){
 
             this.color = color;
@@ -17,6 +18,8 @@ public abstract class Sprite {
             this.width = width;
             this.height = height;
             this.board = board;
+
+
 
             while((int) dx ==0 || (int) dy ==0){
                 double angle = 2 *Math.PI * (Math.random() + 1);
@@ -27,7 +30,9 @@ public abstract class Sprite {
 
         }
 
-        public void move(){
+
+
+    public void move(){
             double nextLeft = x + dx;
             double nexRight=(x + width) + dx;
             double nextTop= y + dy;
@@ -44,6 +49,12 @@ public abstract class Sprite {
             y+=dy;
 
 
+        }
+        public Boolean collidesWith(Sprite other){
+            return getBounds().intersects(other.getBounds());
+        }
+        public Rectangle getBounds(){
+            return new Rectangle(x,y,width,height);
         }
 
         public abstract void paint(Graphics g);

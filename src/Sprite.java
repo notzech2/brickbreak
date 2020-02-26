@@ -5,8 +5,8 @@ public abstract class Sprite {
         Color color;
         int x,y,width,height;
         double dx,dy;
-        final int SPEED = 5;
         Board board;
+        boolean remove = false;
 
 
 
@@ -23,9 +23,9 @@ public abstract class Sprite {
 
             while((int) dx ==0 || (int) dy ==0){
                 double angle = 2 *Math.PI * (Math.random() + 1);
-                double speed = (SPEED * Math.random() +1);
+                double speed = (STATS.getRangeSpeed() * Math.random() +STATS.getLowSpeed());
                 dx = Math.cos(angle) * speed;
-                dy = Math.sin(angle) *speed;
+                dy = Math.sin(angle) * speed;
             }
 
         }
@@ -59,7 +59,6 @@ public abstract class Sprite {
 
         public abstract void paint(Graphics g);
 
-
     public Color getColor() {
         return color;
     }
@@ -70,6 +69,12 @@ public abstract class Sprite {
 
     public int getX() {
         return x;
+    }
+    public boolean isRemove(){
+        return remove;
+    }
+    public void setRemove(){
+        remove =true;
     }
 
     public void setX(int x) {

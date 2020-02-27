@@ -9,6 +9,8 @@ public class Game extends JFrame {
     Board board;
 
     int posX, posY;
+    long moment;
+    boolean mouseCLicked = false;
 
     public Game() {
         setTitle("ShapeyShapes");
@@ -25,6 +27,7 @@ public class Game extends JFrame {
                 setCursor(getToolkit().createCustomCursor(new BufferedImage(3,3,2),new Point(0,0),null));
             }
         });
+
         addMouseMotionListener(new MouseMotionAdapter(){
             @Override
             public void  mouseMoved(MouseEvent e){
@@ -33,10 +36,29 @@ public class Game extends JFrame {
                posY = e.getY();
             }
         });
+
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                mouseCLicked = true;
+                moment = System.currentTimeMillis();
+            }
+        });
+
         pack();
         board.setup();
         setLocationRelativeTo(null);
 
+    }
+    public boolean getIsClicked(){
+        return mouseCLicked;
+    }
+    public void setClicked(){
+         mouseCLicked = false;
+    }
+    public long getMoment(){
+        return moment;
     }
     public int getPosX(){
         return posX;

@@ -12,6 +12,8 @@ public class Board extends JPanel implements ActionListener {
     ArrayList<Sprite> actors;
     int paddingNum = 25;
     Game game;
+
+    long nextMoment;
     Board(Game game){
 
         this.game = game;
@@ -29,6 +31,7 @@ public class Board extends JPanel implements ActionListener {
        for (int i = 0; i < STATS.getNumEnemies(); i++){
            actors.add(new Enemy(Color.RED,(int)(Math.random()*(getWidth()-paddingNum)+paddingNum),(int)(Math.random()*(getHeight()-paddingNum)+paddingNum),50,50,this));
        }
+
 
         timer = new Timer(1000/60,this);
         timer.start();
@@ -50,7 +53,7 @@ public class Board extends JPanel implements ActionListener {
             if(actors.get(0).collidesWith(actors.get(i))){
 
                 if(actors.get(i) instanceof Enemy){
-                    actors.get(0).setRemove();
+                    game.setClicked();
                 }
                 else
                     actors.get(i).setRemove();
@@ -65,15 +68,26 @@ public class Board extends JPanel implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        checkCollisions();
-
-        for(Sprite thisGuy: actors){
-            thisGuy.move();
+        nextMoment = System.currentTimeMillis();
+        if ((nextMoment-game.getMoment()) >= 1500){
+            checkCollisions();
         }
 
-        if(actors.size() <= STATS.getNumEnemies() + 1){
-            System.out.println("THEY DED");
-        }
+
+      if(game.getIsClicked()){
+          for(Sprite thisGuy: actors){
+              thisGuy.move();
+          }
+
+          if(actors.size() <= STATS.getNumEnemies() + 1){
+              System.out.println("THEY DED");
+              game.setClicked();
+          }
+
+      }
+
+
+
 
         repaint();
     }

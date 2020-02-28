@@ -5,6 +5,7 @@ public abstract class Sprite {
         Color color;
         int x,y,width,height;
         double dx,dy;
+        int mass;
         Board board;
         boolean remove = false;
 
@@ -18,6 +19,7 @@ public abstract class Sprite {
             this.width = width;
             this.height = height;
             this.board = board;
+            mass = ((int)Math.sqrt(height) +((int)Math.sqrt(width)));
 
 
 
@@ -34,22 +36,23 @@ public abstract class Sprite {
 
     public void move(){
             double nextLeft = x + dx;
-            double nexRight=(x + width) + dx;
-            double nextTop= y + dy;
-            double nextBottom=(y + height) + dy;
+        double nexRight=(x + width) + dx;
+        double nextTop= y + dy;
+        double nextBottom=(y + height) + dy;
 
-            if (nextTop < 0 || nextBottom >(double)board.getHeight()){
-                dy *=-1;
-            }
-            if (nextLeft < 0 || nexRight >(double)board.getWidth()){
-                dx *=-1;
-            }
+        if (nextTop < 0 || nextBottom >(double)board.getHeight()){
+            dy *=-1;
+        }
+        if (nextLeft < 0 || nexRight >(double)board.getWidth()){
+            dx *=-1;
+        }
 
-            x+=dx;
-            y+=dy;
+        x+=dx;
+        y+=dy;
 
 
         }
+
         public Boolean collidesWith(Sprite other){
             return getBounds().intersects(other.getBounds());
         }
@@ -101,7 +104,14 @@ public abstract class Sprite {
         return height;
     }
 
+
     public void setHeight(int height) {
         this.height = height;
+    }
+    public void setMass(int mass){
+        this.mass += mass;
+    }
+    public int getMass(){
+        return mass;
     }
 }

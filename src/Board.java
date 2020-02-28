@@ -24,7 +24,7 @@ public class Board extends JPanel implements ActionListener {
 
     public void setup(){
        actors = new ArrayList<>();
-       actors.add(new Player(Color.green,getWidth()/2,getHeight()/2,70,70,this,game));
+       actors.add(new Player(Color.green,getWidth()/2,getHeight()/2,30,30,this,game));
        for (int i = 0; i < STATS.getNumFood(); i++){
            actors.add(new Food(Color.orange,(int)(Math.random()*(getWidth()-paddingNum)+paddingNum),(int)(Math.random()*(getHeight()-paddingNum)+paddingNum),20,20,this));
        }
@@ -49,13 +49,31 @@ public class Board extends JPanel implements ActionListener {
 
     }
     public void checkCollisions(){
+        for (int i =1; i<actors.size()-1; i++){
+            if(actors.get(i).collidesWith(actors.get(i+1))){
+                if(actors.get(i) instanceof Enemy && actors.get(i+1) instanceof Enemy){
+                    actors.get(i).move();
+                    actors.get(i+1).move();
+                }
+                if(actors.get(i) instanceof Food && actors.get(i+1) instanceof Food){
+                    actors.get(i).move();
+                    actors.get(i+1).move();
+                }
+
+            }
+        }
         for (int i =1; i<actors.size(); i++){
             if(actors.get(0).collidesWith(actors.get(i))){
 
                 if(actors.get(i) instanceof Enemy){
+                  if(actors.get(0).getMass()>actors.get(i).getMass())
+                      actors.get(i).setRemove();
+                  else
                     game.setClicked();
                 }
+
                 else
+//                    actors.get(0).setMass(actors.get(i).getMass());
                     actors.get(i).setRemove();
             }
         }

@@ -7,7 +7,6 @@ import java.awt.image.BufferedImage;
 
 public class Game extends JFrame {
     Board board;
-
     int posX, posY;
     long moment;
     boolean mouseCLicked = false;
@@ -32,8 +31,8 @@ public class Game extends JFrame {
             @Override
             public void  mouseMoved(MouseEvent e){
                 super.mouseMoved(e);
-               posX = e.getX();
-               posY = e.getY();
+                posX = e.getX();
+                posY = e.getY();
             }
         });
 

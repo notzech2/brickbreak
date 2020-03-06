@@ -1,5 +1,5 @@
 public class STATS {
-     private static int numFood = 5;
+    private static int numFood = 5;
     private static int numEnemies = 2;
     private static int life =3;
     private static int level = 1;

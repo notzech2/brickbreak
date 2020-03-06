@@ -12,6 +12,7 @@ public class Player extends Sprite{
     public void move(){
         x = game.getPosX();
         y = game.getPosY();
+        
 
     }
 

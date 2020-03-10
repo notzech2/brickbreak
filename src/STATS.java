@@ -57,7 +57,7 @@ public class STATS {
         switch (level){
             case 1:
                 setNumFood(5);
-                setNumEnemies(1);
+                setNumEnemies(2);
                 setLowSpeed(4);
                 setRangeSpeed(4);
                 break;

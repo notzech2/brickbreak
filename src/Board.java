@@ -90,6 +90,7 @@ public class Board extends JPanel implements ActionListener {
                   }
                   else {
                       game.setClicked();
+                      setup();
                   }
                 }
 
@@ -126,6 +127,10 @@ public class Board extends JPanel implements ActionListener {
           if(actors.size() <= STATS.getNumEnemies() + 1){
               System.out.println("THEY DED");
               game.setClicked();
+              STATS.setLevel(2);
+              STATS.updateLevel();
+              setup();
+
           }
 
         }

@@ -1,5 +1,5 @@
 import java.awt.*;
-import java.util.ArrayList;
+
 
 public abstract class Sprite {
     Color color;
@@ -14,12 +14,13 @@ public abstract class Sprite {
     public Sprite(Color color, int x, int y, int width, int height, Board board){
 
         this.color = color;
-        this.x=x;
+        this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.board = board;
         mass = height;
+
 
         while((int) dx == 0 || (int) dy == 0){
             double angle = 2 * Math.PI * (Math.random() + 1);

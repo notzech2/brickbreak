@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.ArrayList;
 
 public abstract class Sprite {
     Color color;
@@ -52,7 +53,17 @@ public abstract class Sprite {
 
         }
 
+        public void collides(int i){
+          if (i == 1){
+              dx*=-1;
+          }
+          else if(i == 2){
+              dy*=-1;
+          }
 
+          x+=dx;
+          y+=dy;
+        }
 
 
     public Color getColor() {

@@ -90,6 +90,8 @@ public class Board extends JPanel implements ActionListener {
                   }
                   else {
                       game.setClicked();
+                      STATS.setLevel(1);
+                      STATS.updateLevel();
                       setup();
                   }
                 }
